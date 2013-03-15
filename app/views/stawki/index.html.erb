@@ -1,0 +1,17 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<%end %>
+<h1>Список ставок<h1>
+  <% @events.each do |event| %>
+  <div class="entry">
+    <h3><%=event.title %></h3>
+    <div class="minbits_line">
+      <span class="minbits"><%=number_to_currency(event.minbits) %></span>
+      <h5>Status bits: <%=event.status %></h5>
+      <%=button_to 'Make bits', line_items_path(event_id: event) %>
+    </div>
+  
+
+  </div>
+  <%end %>
+  

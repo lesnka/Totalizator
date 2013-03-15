@@ -1,0 +1,2 @@
+module WaletsHelper
+end
