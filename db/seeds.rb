@@ -7,3 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Role.create(:name => :admin)
 Role.create(:name => :user)
+ #User.create(email: 'admin@yandex.ru', city: cities.first)

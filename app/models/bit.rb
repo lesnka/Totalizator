@@ -1,16 +1,10 @@
 class Bit < ActiveRecord::Base
-  # attr_accessible :title, :body
-  has_many :line_items, dependent: :destroy
-  def 
-
-    add_event(event_id)
-    current_item = line_items.find_by_event_id(event_id)
-    if current_item 
-      current_item.price += 100
-    else 
-      event = Event.find(params[:event_id])
-      current_item = line_items.build(event_id: event_id, price: :event.minbits)
-    end  
-     current_item
-  end
+ attr_accessible :user_id, :sum, :event_id, :payed
+  #has_many :lines_items, dependent: :destroy
+  belongs_to :user
+  belongs_to :event
+  validates :sum, numericality: {greater_than_or_equal_to: 99}  
+   
+  
+      
 end

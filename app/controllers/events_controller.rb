@@ -2,34 +2,19 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    
+    @events = Event.order(:title)
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @events }
-    end
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @event }
-    end
   end
 
   # GET /events/new
   # GET /events/new.json
   def new
     @event = Event.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @event }
-    end
   end
 
   # GET /events/1/edits
@@ -41,15 +26,10 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
-
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render json: @event, status: :created, location: @event }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.save
+      redirect_to @event, notice: 'Event was successfully created.'
+    else
+      render action: "new" 
     end
   end
 
@@ -57,15 +37,10 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-
-    respond_to do |format|
-      if @event.update_attributes(params[:event])
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update_attributes(params[:event])
+      redirect_to @event, notice: 'Event was successfully updated.'
+    else
+      render action: "edit" 
     end
   end
 
@@ -74,10 +49,38 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-
-    respond_to do |format|
-      format.html { redirect_to events_url }
-      format.json { head :no_content }
+    redirect_to events_url 
+  end
+ 
+  def make_bit
+    begin
+      user = current_user
+      event = Event.find(params[:id])
+      bit = user.bits.find_by_event_id(event.id)
+      if bit
+         notice = 'Bit already exist.'
+      else   
+        bit = Bit.new(user_id: user.id, event_id: event.id, sum: event.minbits, payed: false)
+        if bit.save
+          notice = 'Bit was successfully created.'
+        else
+          notice = 'Bit not created.'
+        end
+      end
+      redirect_to events_url, notice: notice
+      rescue
+      redirect_to events_url, notice: 'Please login or register' 
     end
+  end
+  
+  private
+ 
+  def find_current_bit
+    bit = Bit.find_by_id(session[:bit_id])
+    if bit.nil?
+      bit = Bit.create(user_id: current_user.id, payed: false)
+      session[:bit_id] = bit.id
+    end
+    bit
   end
 end

@@ -2,27 +2,27 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: dev_totalizator
+  database: new
   username: root
-  password: 
+  password: password
   host: 127.0.0.1
   port: 3306
 
 test:
   adapter: mysql2
   encoding: utf8
-  database: dev_totalizator
+  database: new
   username: root
-  password: 
+  password: password
   host: 127.0.0.1
   port: 3306
 
 production:
   adapter: mysql2
   encoding: utf8
-  database: dev_totalizator
+  database: new
   username: root
-  password: 
+  password: password
   host: 127.0.0.1
   port: 3306
 

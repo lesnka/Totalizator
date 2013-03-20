@@ -1,5 +1,9 @@
-<p id="notice"><%= notice %></p>
 
+ <p <%='Bits show'%></p>
+  
 
+            <h2><%=@event.title %><h2>
+            <dt><%=@event.status %></dt>
+            <dt><%=@event.minbits %></dt>
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

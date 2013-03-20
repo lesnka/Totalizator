@@ -1,20 +1,31 @@
 Totalizator::Application.routes.draw do
-  resources :line_items
+  resources :user_bits
+
+
+  #resources :line_items
 
 
   resources :bits
 
 
-  resources :walets
+  resources :wallets
 
 
-  get "stawki/index"
+  #get "events/index"
 
   resources :events
+  #get ':controller/:action/:event_id'
 
-
-  resources :posts
-
+  #resources :posts
+  resources :events do
+    post 'make_bit', :on => :member
+  end
+  
+  resources :bits do
+    collection do 
+      post 'pay_bits'
+    end
+  end
 
   devise_for :users
 

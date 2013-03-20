@@ -11,11 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313142141) do
+ActiveRecord::Schema.define(:version => 20130318142821) do
 
   create_table "bits", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.decimal  "sum",        :precision => 8, :scale => 2
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.boolean  "payed"
   end
 
   create_table "events", :force => true do |t|
@@ -25,24 +29,6 @@ ActiveRecord::Schema.define(:version => 20130313142141) do
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
   end
-
-  create_table "line_items", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "bit_id"
-    t.decimal  "price",      :precision => 8, :scale => 2
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-  end
-
-  create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -85,8 +71,9 @@ ActiveRecord::Schema.define(:version => 20130313142141) do
 
   create_table "wallets", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+    t.decimal  "balance",    :precision => 8, :scale => 2, :default => 10000.0
   end
 
 end

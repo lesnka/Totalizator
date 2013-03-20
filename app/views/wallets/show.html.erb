@@ -1,0 +1,7 @@
+ <% if notice %>
+ <p id="notice"><%=notice %></p>
+  <%end%>
+ <tr><h1>Your balance<h1>
+    <h2><%=@wallet.balance%><h2>
+<%= link_to 'Edit', edit_wallet_path(@wallet) %> |
+<%= link_to 'Back', wallets_path %>

@@ -1,14 +1,10 @@
 <% if notice %>
 <p id="notice"><%= notice %></p>
 <% end %>
-<h2>Yoir Bits</h2>
+<h2>Your Bits</h2>
 <ul>
-    <% @bit.line_items.each do |item| %>
-      <li><%=item.event.title %>&times; <%=item.price%> 
-        </li>
-    <%end%>
-  </ul>
-<%=button_to 'Empty bit', @bit, method: :delete,
-confirm: 'are you sure?' %>
-<%= link_to 'Edit', edit_bit_path(@bit) %> |
-<%= link_to 'Back', bits_path %>
+  <li><%=@bit.event.title %>&times; <%=@bit.sum%> 
+       <%= link_to 'Edit', edit_bit_path(id: @bit.id) %> 
+  </li>
+  
+</ul>

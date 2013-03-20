@@ -1,12 +1,14 @@
 class BitsController < ApplicationController
   # GET /bits
   # GET /bits.json
+#load_and_authorize_resource
+ 
   def index
-    @bits = Bit.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @bits }
+    begin
+      @bits = Bit.all
+      @user = current_user
+    rescue
+      redirect_to events_url, notice: 'Please login or register'
     end
   end
 
@@ -17,12 +19,7 @@ class BitsController < ApplicationController
       @bit = Bit.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       logger.error "bits number #{params[:id]} not found"
-      redirect_to stawki_index_url, notice: 'not found bits'
-    else
-      respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @bit }
-      end
+      redirect_to events_index_url, notice: 'not found bits'
     end
   end
 
@@ -30,11 +27,6 @@ class BitsController < ApplicationController
   # GET /bits/new.json
   def new
     @bit = Bit.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @bit }
-    end
   end
 
   # GET /bits/1/edit
@@ -44,33 +36,16 @@ class BitsController < ApplicationController
 
   # POST /bits
   # POST /bits.json
-  def create
-    @bit = Bit.new(params[:bit])
-
-    respond_to do |format|
-      if @bit.save
-        format.html { redirect_to @bit, notice: 'Bit was successfully created.' }
-        format.json { render json: @bit, status: :created, location: @bit }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @bit.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+ 
 
   # PUT /bits/1
   # PUT /bits/1.json
   def update
     @bit = Bit.find(params[:id])
-
-    respond_to do |format|
-      if @bit.update_attributes(params[:bit])
-        format.html { redirect_to @bit, notice: 'Bit was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @bit.errors, status: :unprocessable_entity }
-      end
+    if @bit.update_attributes(params[:bit])
+       redirect_to @bit, notice: 'Bit was successfully updated.' 
+    else
+    render action: "edit" 
     end
   end
 
@@ -79,10 +54,41 @@ class BitsController < ApplicationController
   def destroy
     @bit = Bit.find(params[:id])
     @bit.destroy
+    redirect_to bits_url, notice: 'Your bit empty!'
+  end
 
-    respond_to do |format|
-      format.html { redirect_to stawki_index_url, notice: 'Your bits empty!' }
-      format.json { head :ok }
+def pay_bits
+  user = current_user  
+  sum_of_pay=user.sum_pay
+  if sum_of_pay==0
+    redirect_to events_url, notice: "You have already paid bits in your list. You can pay for the new."
+    #throw sum_of_pay
+    else
+    @wallet = find_current_wallet
+    if @wallet.balance>=sum_of_pay
+      @wallet.balance-=sum_of_pay
+      @wallet.save
+      user.price
+      sum_of_pay=0
+      redirect_to bits_url, notice: "#{sum_of_pay}bits are made. Your balance is:#{@wallet.balance}."
+    else
+      redirect_to wallets_path(@wallet), notice: "bits are not made. Your balance is:#{@wallet.balance}." 
     end
   end
+end
+
+def find_current_wallet
+  wallet = Wallet.find_by_id(session[:wallet_id])
+  if wallet.nil?
+    wallet = Wallet.create(user_id: current_user.id)
+    #if wallet.save == false
+      #throw wallet.errors
+    #end
+    session[:wallet_id] = wallet.id
+  end
+  wallet
+  #redirect_to bits_url
+end
+
+
 end

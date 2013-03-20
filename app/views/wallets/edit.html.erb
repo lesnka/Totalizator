@@ -1,0 +1,8 @@
+<h1>Editing wallet</h1>
+ <% if notice %>
+ <p id="notice"><%=notice %></p>
+  <%end%>
+<%= render 'form' %>
+
+<%= link_to 'Show', wallets_url %> |
+<%= link_to 'Back', wallets_path %>

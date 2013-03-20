@@ -1,3 +1,7 @@
+
+ <% if notice %>
+ <p id="notice"><%=notice %></p>
+  <%end%>
 <h1>Listing events</h1>
 
 <table>
@@ -11,17 +15,24 @@
         <dl>
             <dt><%=event.title %></dt>
             <dt><%=event.status %></dt>
+            <dt><%=button_to 'Make_bit',{action: "make_bit", id: event.id} %></dt>
         </dl>    
 
     </td>  
+    
       <td class="list_actions">
-     <%= link_to 'Show', event %><br/>
-     <%= link_to 'Edit', edit_event_path(event) %><br/>
-     <%= link_to 'Destroy', event,
-                  confirm: 'Are you sure?' ,
-                  method: :delete %>
-      </td>
-  </tr>
+          <%= link_to 'Show', event %><br/>
+          <% if can? :create, Event %>
+              <%= link_to 'Edit', edit_event_path(event) %><br/>
+           <%end%>
+           <% if can? :destroy, Event %>
+              <%= link_to 'Destroy', event,
+              confirm: 'Are you sure?' ,
+              method: :delete %>
+           <%end%>
+            </td>
+
+        </tr>
 <% end %>
 </table>
 
