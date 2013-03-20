@@ -12,13 +12,15 @@
 <ul>
 <% @user.bits.each do |bit| %>
   <li><%=bit.event.title %>&times; <%=bit.sum%> 
+       
+       <% if !bit.payed? %>
        <%= link_to 'Edit', edit_bit_path(id: bit.id) %><br/>
        
        
        <%= link_to 'Destroy', bit,
                   confirm: 'Are you sure?' ,
                   method: :delete %>
-       
+       <%end%>
    </li>
     <%end%>
     <tr class="total_line">

@@ -52,27 +52,43 @@ class EventsController < ApplicationController
     redirect_to events_url 
   end
  
+
+
   def make_bit
     begin
       user = current_user
       event = Event.find(params[:id])
-      bit = user.bits.find_by_event_id(event.id)
-      if bit
-         notice = 'Bit already exist.'
-      else   
-        bit = Bit.new(user_id: user.id, event_id: event.id, sum: event.minbits, payed: false)
-        if bit.save
-          notice = 'Bit was successfully created.'
-        else
-          notice = 'Bit not created.'
+      if event.status == "suspense"
+        bit = user.bits.find_by_event_id(event.id)
+        if bit
+           notice = 'Bit already exist.'
+        else   
+          bit = Bit.new(user_id: user.id, event_id: event.id, sum: event.minbits, payed: false)
+          if bit.save
+            notice = 'Bit was successfully created.'
+          else
+            notice = 'Bit not created.'
+          end
         end
-      end
-      redirect_to events_url, notice: notice
+        redirect_to events_url, notice: notice
+      else
+        redirect_to events_url, notice: 'Bit is already not use'
+      end  
       rescue
       redirect_to events_url, notice: 'Please login or register' 
     end
+
+  end
+  def make_status_bits
+    Event.make_status
+    User.add_balance
+    redirect_to events_url, notice: 'All bits make' 
   end
   
+  def cancel_status_bits
+    Event.make_suspense
+    redirect_to events_url, notice: 'All make' 
+  end
   private
  
   def find_current_bit

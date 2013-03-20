@@ -70,9 +70,9 @@ def pay_bits
       @wallet.save
       user.price
       sum_of_pay=0
-      redirect_to bits_url, notice: "#{sum_of_pay}bits are made. Your balance is:#{@wallet.balance}."
+      redirect_to bits_url, notice: "Bits are made. Your balance is:#{@wallet.balance}."
     else
-      redirect_to wallets_path(@wallet), notice: "bits are not made. Your balance is:#{@wallet.balance}." 
+      redirect_to wallets_path(@wallet), notice: "Bits are not made. Your balance is:#{@wallet.balance}." 
     end
   end
 end

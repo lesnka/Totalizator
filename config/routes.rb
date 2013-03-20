@@ -18,15 +18,26 @@ Totalizator::Application.routes.draw do
 
   #resources :posts
   resources :events do
-    post 'make_bit', :on => :member
+    post :make_bit, :on => :member
   end
   
   resources :bits do
     collection do 
-      post 'pay_bits'
+      post :pay_bits
     end
   end
 
+  resources :events do
+    collection do 
+      post :make_status_bits
+    end
+  end
+  
+  resources :events do
+    collection do 
+      post :cancel_status_bits
+    end
+  end
   devise_for :users
 
   root to: "home#index"

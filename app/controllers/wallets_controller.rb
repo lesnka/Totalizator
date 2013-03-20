@@ -49,8 +49,6 @@ class WalletsController < ApplicationController
     end
   end
 
-  # DELETE /wallets/1
-  # DELETE /wallets/1.json
   def destroy
     @wallet = Wallet.find(params[:id])
     @wallet.destroy

@@ -11,4 +11,5 @@ class Wallet < ActiveRecord::Base
       balance ||= 10000
     end
 
+    
 end
