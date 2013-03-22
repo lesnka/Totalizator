@@ -1,9 +1,0 @@
- <% if notice %>
- <p id="notice"><%=notice %></p>
-  <%end%>
- <tr><h1>Your balance<h1>
-  <% if @wallet.user_id == current_user.id %>
-    <h2><%=@wallet.balance%><h2>
-<%= link_to 'Edit', edit_wallet_path(@wallet) %> |
-    <%end%>
-<%= link_to 'Back', wallets_path %>
