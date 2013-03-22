@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320023549) do
+ActiveRecord::Schema.define(:version => 20130321122545) do
 
   create_table "bits", :force => true do |t|
     t.integer  "event_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130320023549) do
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
     t.string   "role",                   :default => "user"
+    t.integer  "wallet_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -1,0 +1,24 @@
+- if notice
+  %p#notice= notice
+%h1 Listing bits
+%table
+  %tr
+    %th
+    %th
+    %th
+  %ul
+    - @user.bits.each do |bit|
+      %li
+        = bit.event.title
+        \&times; #{bit.sum}
+        - if !bit.payed?
+          = link_to 'Edit', edit_bit_path(id: bit.id)
+          %br/
+        = link_to 'Destroy', bit,    |
+          confirm: 'Are you sure?' , |
+          method: :delete            |
+  %tr.total_line
+    %td{:colspan => "2"} Total
+    %td.total_cell= number_to_currency(@user.sum_pay)
+  %td= button_to 'Pay bits', action: :pay_bits
+  %td= button_to 'See_balance', action: :see_balance

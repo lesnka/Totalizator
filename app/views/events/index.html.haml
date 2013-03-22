@@ -1,0 +1,36 @@
+- if notice
+  %p#notice= notice
+%h1 Listing events
+%table
+  - @events.each do |event|
+    %tr{:class => "<haml:silent>cycle('list_line_odd', 'list_line_even') </haml:silent>"}
+    %tr
+      %td.list_description
+        %dl
+          %dt= event.title
+          %dt= event.status
+          %dt
+            $#{event.minbits}
+          %dt= button_to 'Make bit', action: :make_bit, id: event.id
+      %td.list_actions
+        = link_to 'Show', event
+        %br/
+        - if can? :create, Event
+          = link_to 'Edit', edit_event_path(event)
+          %br/
+        - if can? :destroy, Event
+          = link_to 'Destroy', event,  |
+            confirm: 'Are you sure?' , |
+            method: :delete            |
+- if can? :create, Event
+  %dt= button_to 'Make_status_bits', action: :make_status_bits
+  %dt= button_to 'Cancel_status_bits', action: :cancel_status_bits
+  %br/
+  = link_to 'New Event', new_event_path
+
+       
+
+
+
+
+

@@ -1,0 +1,7 @@
+%h1 Editing wallet
+- if notice
+  %p#notice= notice
+= render 'form'
+= link_to 'Show', wallets_url
+|
+\#{link_to 'Back', wallet_path}

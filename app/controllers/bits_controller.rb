@@ -43,7 +43,13 @@ class BitsController < ApplicationController
   def update
     @bit = Bit.find(params[:id])
     if @bit.update_attributes(params[:bit])
-       redirect_to @bit, notice: 'Bit was successfully updated.' 
+        if @bit.sum < @bit.event.minbits
+           @bit.sum = @bit.event.minbits
+           @bit.save
+           redirect_to @bit, notice: 'Your summa is small. Edit abort' 
+        else
+        redirect_to @bit, notice:  'Bit was successfully updated.'
+        end
     else
     render action: "edit" 
     end
@@ -72,22 +78,18 @@ def pay_bits
       sum_of_pay=0
       redirect_to bits_url, notice: "Bits are made. Your balance is:#{@wallet.balance}."
     else
-      redirect_to wallets_path(@wallet), notice: "Bits are not made. Your balance is:#{@wallet.balance}." 
+      redirect_to wallet_path(@wallet), notice: "Bits are not made. Your balance is:#{@wallet.balance}." 
     end
   end
 end
 
+def see_balance
+  @wallet = find_current_wallet
+  redirect_to wallet_path(@wallet), notice: "#{current_user.wallet.id}redirect to your balance:"  
+end
+
 def find_current_wallet
-  wallet = Wallet.find_by_id(session[:wallet_id])
-  if wallet.nil?
-    wallet = Wallet.create(user_id: current_user.id)
-    #if wallet.save == false
-      #throw wallet.errors
-    #end
-    session[:wallet_id] = wallet.id
-  end
-  wallet
-  #redirect_to bits_url
+  current_user.wallet ? current_user.wallet : Wallet.create(user_id: current_user.id)
 end
 
 

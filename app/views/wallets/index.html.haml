@@ -1,0 +1,42 @@
+%h1 Listing wallets
+%h2
+  \-----------------------
+  %h2
+    %table
+      %tr
+        %th
+        %th
+        %th
+      
+        - if can? :create, Event
+          - @wallets.each do |wallet|
+            %ol
+              
+              %h3
+                Wallets id: #{wallet.id}
+              %h3
+              %h3
+                Balance: #{wallet.balance}
+              %h3
+              %h3
+                email: #{wallet.user.email}
+              %h3
+              %ul
+                %h4 User bits
+                %h4
+                - wallet.user.bits.each do |bit|
+                  %li
+                    %h5
+                      = bit.event.title
+                      = bit.sum
+                    %h5/
+                %ul/    
+              = link_to 'Show', wallet
+              %br/
+              = link_to 'Edit', edit_wallet_path(wallet)
+              %br/
+              = link_to 'Destroy', wallet, method: :delete, data: { confirm: 'Are you sure?' }
+              %br/
+            
+            
+    %br/

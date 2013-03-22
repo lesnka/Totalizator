@@ -1,0 +1,23 @@
+= form_for(@bit) do |f|
+  - if @bit.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@bit.errors.count, "error")
+        prohibited this bit from being saved:
+      %ul
+        - @bit.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :sum
+    %br/
+    = f.number_field :sum
+  .field
+    = f.label :user_id
+    %br/
+    = f.number_field :user_id
+  .field
+    = f.label :event_id
+    %br/
+    = f.number_field :event_id
+  .actions
+    = f.submit

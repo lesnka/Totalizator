@@ -24,6 +24,11 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'cancan'
 gem 'mysql2'
+gem 'haml'
+group :test do
+  gem "rspec"
+  gem "spork"
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

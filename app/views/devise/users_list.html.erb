@@ -1,0 +1,9 @@
+ <% if notice %>
+   <p id="notice"><%=notice %></p>
+    <%end%>
+  <h1>Listing users</h1>
+   <% User.all.each do |user| %>      
+   <h3><%=user.email%><h3>
+  <%end%>
+    
+      

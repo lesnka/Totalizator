@@ -80,9 +80,13 @@ class EventsController < ApplicationController
 
   end
   def make_status_bits
-    Event.make_status
-    User.add_balance
-    redirect_to events_url, notice: 'All bits make' 
+    begin
+      Event.make_status
+      User.add_balance
+      redirect_to events_url, notice: 'All bits make' 
+    rescue
+      redirect_to events_url, notice: 'No wallet'
+    end
   end
   
   def cancel_status_bits

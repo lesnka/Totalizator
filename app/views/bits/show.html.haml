@@ -1,0 +1,8 @@
+- if notice
+  %p#notice= notice
+%h2 Your Bits
+%ul
+  %li
+    = @bit.event.title
+    \&times; #{@bit.sum}
+    \#{link_to 'Edit', edit_bit_path(id: @bit.id)}

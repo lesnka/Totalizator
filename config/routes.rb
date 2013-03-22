@@ -26,6 +26,12 @@ Totalizator::Application.routes.draw do
       post :pay_bits
     end
   end
+  
+  resources :bits do
+    collection do 
+      post :see_balance
+    end
+  end
 
   resources :events do
     collection do 

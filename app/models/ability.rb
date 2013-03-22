@@ -8,6 +8,7 @@ class Ability
       if user.role == 'admin'
         can :manage, Wallet, user_id = user.id
         can :manage, Event
+        can :destroy, Wallet
       end
       if user.role == 'user'
         can :manage, Bit, payed: false

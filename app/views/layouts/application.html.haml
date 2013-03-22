@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title Totalizator
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body{:class => controller.controller_name}
+    #banneer
+      = image_tag("logo.png")
+      = @page_title || "Panel_to_action"
+      %p
+        Текущее время: #{Time.now}
+    #colums
+      #side
+        %ul
+          %li
+            %a{:href => "http://localhost:3000/"} Home
+          %li
+            %a{:href => "http://localhost:3000/events/"} Stawki
+          %li
+            %a{:href => "http://localhost:3000/bits/"} YourBits
+        - if can? :create, Event
+          %li
+            %a{:href => "http://localhost:3000/events/new"} News
+          %li
+            %a{:href => "http://localhost:3000/wallets/"} All Wallets
+      #main
+        = render "shared/links"
+        = yield
