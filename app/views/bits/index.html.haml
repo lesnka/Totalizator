@@ -14,6 +14,9 @@
         - if !bit.payed?
           = link_to 'Edit', edit_bit_path(id: bit.id)
           %br/
+        - if !bit.payed? 
+          = button_to 'Pay pay_this_bit', action: :pay_this_bit, id: bit.id
+          %br/
         = link_to 'Destroy', bit,    |
           confirm: 'Are you sure?' , |
           method: :delete            |

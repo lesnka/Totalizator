@@ -52,8 +52,6 @@ class EventsController < ApplicationController
     redirect_to events_url 
   end
  
-
-
   def make_bit
     begin
       user = current_user

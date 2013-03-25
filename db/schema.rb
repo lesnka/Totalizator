@@ -66,11 +66,6 @@ ActiveRecord::Schema.define(:version => 20130321122545) do
   add_index "users_roles", ["role_id"], :name => "index_users_roles_on_role_id"
   add_index "users_roles", ["user_id"], :name => "index_users_roles_on_user_id"
 
-  create_table "walets", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "wallets", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at",                                                    :null => false

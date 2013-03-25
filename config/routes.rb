@@ -1,4 +1,10 @@
 Totalizator::Application.routes.draw do
+  resources :cats
+
+
+  resources :fs
+
+
   resources :user_bits
 
 
@@ -21,12 +27,26 @@ Totalizator::Application.routes.draw do
     post :make_bit, :on => :member
   end
   
+  resources :events do
+      post :it_exist, :on => :member
+  end
+
   resources :bits do
     collection do 
       post :pay_bits
     end
   end
   
+
+
+resources :bits do
+    collection do 
+      post :pay_this_bit
+    end
+end
+
+
+
   resources :bits do
     collection do 
       post :see_balance

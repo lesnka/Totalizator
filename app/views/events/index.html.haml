@@ -11,7 +11,8 @@
           %dt= event.status
           %dt
             $#{event.minbits}
-          %dt= button_to 'Make bit', action: :make_bit, id: event.id
+          - if !current_user.bits.find_by_event_id(event.id)
+            %dt= button_to 'Make bit', action: :make_bit, id: event.id
       %td.list_actions
         = link_to 'Show', event
         %br/

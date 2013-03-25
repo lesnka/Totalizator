@@ -63,7 +63,22 @@ class BitsController < ApplicationController
     redirect_to bits_url, notice: 'Your bit empty!'
   end
 
+def pay_this_bit
+  @bit = Bit.find(params[:id])
+  @wallet = find_current_wallet
+    if @wallet.balance>=@bit.sum
+      @wallet.balance-=@bit.sum
+      @wallet.save
+      @bit.payed = true
+      @bit.save
+      redirect_to bits_url, notice: "Bit are made. Your balance is:#{@wallet.balance}."
+    else
+          redirect_to wallet_path(@wallet), notice: "Bits are not made. Your balance is:#{@wallet.balance}." 
+    end      
+end
+
 def pay_bits
+  
   user = current_user  
   sum_of_pay=user.sum_pay
   if sum_of_pay==0
@@ -84,8 +99,12 @@ def pay_bits
 end
 
 def see_balance
-  @wallet = find_current_wallet
-  redirect_to wallet_path(@wallet), notice: "#{current_user.wallet.id}redirect to your balance:"  
+  begin
+    @wallet = find_current_wallet
+    redirect_to wallet_path(@wallet), notice: "#{current_user.wallet.id}redirect to your balance:"  
+  rescue
+  redirect_to wallet_path(@wallet), notice: "Your wallet is create"  
+  end
 end
 
 def find_current_wallet
