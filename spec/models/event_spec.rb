@@ -1,10 +1,10 @@
 require 'spec_helper'
-
+require 'factory_girl'
 describe Event do
   before(:each) do
-    @event1=Event.new(name: 'Bits#50', minbits: 120, status: 'suspense')
-    @event2=Event.new(name: 'Bits#51', minbits: 120, status: 'loss')
-    @event3=Event.new(name: 'Bits#52', minbits: 120, status: 'win')
+    @event1 = Factory(:event1)
+    @event2 = Factory(:event2)
+    @event3 = Factory(:event3)
   end
 
 

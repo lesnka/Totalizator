@@ -11,14 +11,22 @@
       = @page_title || "Panel_to_action"
       %p
         Текущее время: #{Time.now}
+        - if !user_signed_in?
+          %h1 Please rigister or sign in
     #colums
       #side
         %ul
           %li
+          - if !user_signed_in?
+            %h1
+            Please rigister or sign in
+          - if user_signed_in?
             %a{:href => "http://localhost:3000/"} Home
           %li
+          - if user_signed_in?
             %a{:href => "http://localhost:3000/events/"} Stawki
           %li
+          - if user_signed_in?  
             %a{:href => "http://localhost:3000/bits/"} YourBits
         - if can? :create, Event
           %li
