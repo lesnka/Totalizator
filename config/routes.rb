@@ -1,4 +1,7 @@
 Totalizator::Application.routes.draw do
+  resources :mice
+
+
   resources :cats
 
 

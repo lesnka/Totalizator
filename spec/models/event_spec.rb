@@ -1,22 +1,34 @@
 require 'spec_helper'
-require 'factory_girl'
+
 describe Event do
   before(:each) do
-    @event1 = Factory(:event1)
-    @event2 = Factory(:event2)
-    @event3 = Factory(:event3)
+    Event.delete_all
+    @event = create :event
+    #@event3 = Event.create(title: "bits90", minbits: 200, status: "suspense")
+    #@event1 = FactoryGirl.create :suspense_event
+    # @event2 = FactoryGirl.create :status_loss
   end
 
+  it 'save with correct values' do
+    @event.save
+    @event.should be_valid
+  end
 
-it 'method make status test' do
-  Event.make_status
-  event1.status.should_not == 'suspense'
-end
+  it 'Presense title' do
+    @event.title = nil
+    @event.save
+    @event.should_not be_valid
+  end
+  
+  it 'method make status test' do
+   Event.make_status  
+   @event.reload.status.should_not == 'suspense'
+  end
 
 it 'method make suspense test' do
-  Event.make_suspense
-  event2.status.should_not == 'loss'
-  event3.status.should_not == 'win'
+   @event.status = 'win'
+   Event.make_suspense
+   @event.reload.status.should == 'suspense'
 end
 
 
