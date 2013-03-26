@@ -16,27 +16,27 @@ class User < ActiveRecord::Base
     #ROLES=%w[admin user]
     def sum_pay
       bits.sum{|i| 
-        if i.payed==false 
+        if i.payed==false    #++++++
           i.sum 
         else 0
       end}  
     end
 
     def sum_bits
-      bits.sum{|i| 
+      bits.sum{|i|  #+++++
           i.sum 
           }  
     end
     
     def price
       bits.map!{|i| 
-        i.payed=true 
+        i.payed=true  #+++++
         i.save}  
     end
     
     def self.profit
       x=0
-      User.all.each do |user|
+      User.all.each do |user|  #+++++
         x= x + user.sum_bits
       end
       x
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
     def my_win
       x=0
       bits.all.each do |bit|
-        if bit.event.status == 'win'
+        if bit.event.status == 'win'   #++++
           x=x+bit.sum
         end  
       end
@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   
     def self.add_balance
       User.all.map! do |user|
-      user.wallet.balance = user.wallet.balance + user.my_win + user.my_win* user.user_profit
+      user.wallet.balance = user.wallet.balance + user.my_win + user.my_win* user.user_profit #+++++
       user.wallet.save
       #puts user.wallet.balance
       end
