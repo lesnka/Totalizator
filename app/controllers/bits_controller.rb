@@ -1,8 +1,5 @@
 class BitsController < ApplicationController
-  # GET /bits
-  # GET /bits.json
-#load_and_authorize_resource
- 
+  inherit_resources
   def index
     begin
       @bits = Bit.all
@@ -12,8 +9,6 @@ class BitsController < ApplicationController
     end
   end
 
-  # GET /bits/1
-  # GET /bits/1.json
   def show
     begin
       @bit = Bit.find(params[:id])
@@ -23,23 +18,6 @@ class BitsController < ApplicationController
     end
   end
 
-  # GET /bits/new
-  # GET /bits/new.json
-  def new
-    @bit = Bit.new
-  end
-
-  # GET /bits/1/edit
-  def edit
-    @bit = Bit.find(params[:id])
-  end
-
-  # POST /bits
-  # POST /bits.json
- 
-
-  # PUT /bits/1
-  # PUT /bits/1.json
   def update
     @bit = Bit.find(params[:id])
     if @bit.update_attributes(params[:bit])
@@ -55,13 +33,6 @@ class BitsController < ApplicationController
     end
   end
 
-  # DELETE /bits/1
-  # DELETE /bits/1.json
-  def destroy
-    @bit = Bit.find(params[:id])
-    @bit.destroy
-    redirect_to bits_url, notice: 'Your bit empty!'
-  end
 
 def pay_this_bit
   @bit = Bit.find(params[:id])
