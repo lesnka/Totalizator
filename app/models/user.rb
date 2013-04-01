@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :bits, dependent: :destroy
   has_one :wallet
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :wallet_id, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :wallet_id, :email, :password, :password_confirmation, :remember_me, :role
   # attr_accessible :title, :body
     #before_create :create_role
     #ROLES=%w[admin user]

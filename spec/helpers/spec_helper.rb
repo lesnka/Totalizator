@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'factory_girl'
-
+require 'capybara/rails'
+require 'capybara/rspec'
 # Specs in this file have access to a helper object that includes
 # the EventsHelper. For example:
 #

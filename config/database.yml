@@ -8,7 +8,7 @@ development:
   host: 127.0.0.1
   port: 3306
 
-test:
+test: &test
   adapter: mysql2
   encoding: utf8
   database: test
@@ -26,3 +26,6 @@ production:
   host: 127.0.0.1
   port: 3306
 
+
+cucumber:
+  <<: *test
