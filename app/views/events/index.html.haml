@@ -12,7 +12,7 @@
           %dt
             $#{event.minbits}
           - if !current_user.bits.find_by_event_id(event.id)
-            %dt= button_to "Make bit #{index}", action: :make_bit, id: event.id
+            %dt= button_to "Make bit #{index}", {action: :make_bit, id: event.id}, :class => "btn btn-danger", id: "button_#{index}"
       %td.list_actions
         = link_to 'Show', event
         %br/
@@ -24,8 +24,8 @@
             confirm: 'Are you sure?' , |
             method: :delete            |
 - if can? :create, Event
-  %dt= button_to 'Make_status_bits', action: :make_status_bits
-  %dt= button_to 'Cancel_status_bits', action: :cancel_status_bits
+  %dt= button_to 'Make_status_bits', {action: :make_status_bits}, :class =>"btn btn-primary "
+  %dt= button_to 'Cancel_status_bits', {action: :cancel_status_bits}, :class =>"btn btn-primary "
   %br/
   = link_to 'New Event', new_event_path
 

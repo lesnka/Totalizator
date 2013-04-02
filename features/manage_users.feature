@@ -3,7 +3,7 @@ Feature: Manage User
   As an user
   I want to create and manage articles
 
-  Scenario: What see User
+Scenario: What see User
     Given I have user account
     And I am on the home page
     When I follow "Sign in"
@@ -13,7 +13,7 @@ Feature: Manage User
     Then I should see "Stawki"
     And I should see "YourBits"
   
-  Scenario: What see admin
+Scenario: What see admin
     Given I have admin account
     And I am on the home page
     When I follow "Sign in"

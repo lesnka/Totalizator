@@ -1,11 +1,11 @@
-%ul
+%ul.nav
   - if user_signed_in?
-    %li
+    %li.divider-vertical
       = link_to "My Profile", edit_user_registration_path
-    %li
+    %li.divider-vertical
       = link_to "Sign out", destroy_user_session_path
   - else
-    %li
+    %li.divider-vertical
       = link_to "Sign up", new_user_registration_path
-    %li
+    %li.divider-vertical
       = link_to "Sign in", new_user_session_path

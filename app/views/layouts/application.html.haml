@@ -10,29 +10,31 @@
       = image_tag("logo.png")
       = @page_title || "Panel_to_action"
       %p
-        Текущее время: #{Time.now}
+        
         - if !user_signed_in?
-          %h1 Please rigister or sign in
-    #colums
-      #side
-        %ul
-          %li
-          - if !user_signed_in?
-            %h1
-            Please rigister or sign in
+          %h1 Please register or sign in
+     
+          
+
+
+
+    .navbar
+      .navbar-inner
+        %ul.nav
           - if user_signed_in?
-            %a{:href => "http://localhost:3000/"} Home
-          %li
+            %a.brand{:href => "http://localhost:3000/"} Home
+          %li.divider-vertical
           - if user_signed_in?
-            %a{:href => "http://localhost:3000/events/"} Stawki
-          %li
+            %a.brand{:href => "http://localhost:3000/events/"} Stawki
+          %li.divider-vertical
           - if user_signed_in?  
-            %a{:href => "http://localhost:3000/bits/"} YourBits
-        - if can? :create, Event
-          %li
-            %a{:href => "http://localhost:3000/events/new"} News
-          %li
-            %a{:href => "http://localhost:3000/wallets/"} All Wallets
-      #main
-        = render "shared/links"
-        = yield
+            %a.brand{:href => "http://localhost:3000/bits/"} YourBits
+          %li.divider-vertical
+          - if can? :create, Event
+            %a.brand{:href => "http://localhost:3000/events/new"} News
+          %li.divider-vertical
+          - if can? :create, Event
+            %a.brand{:href => "http://localhost:3000/wallets/"} All Wallets
+          = render "shared/links" 
+      .span10
+        = yield 

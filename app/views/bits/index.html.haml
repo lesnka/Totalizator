@@ -15,7 +15,7 @@
           = link_to 'Edit', edit_bit_path(id: bit.id)
           %br/
         - if !bit.payed? 
-          = button_to 'Pay pay_this_bit', action: :pay_this_bit, id: bit.id
+          = button_to 'Pay pay_this_bit', {action: :pay_this_bit, id: bit.id}, :class =>"btn btn-primary "
           %br/
         = link_to 'Destroy', bit,    |
           confirm: 'Are you sure?' , |
@@ -23,5 +23,6 @@
   %tr.total_line
     %td{:colspan => "2"} Total
     %td.total_cell= number_to_currency(@user.sum_pay)
-  %td= button_to 'Pay bits', action: :pay_bits
-  %td= button_to 'See_balance', action: :see_balance
+  
+  %td= button_to 'Pay bits', {action: :pay_bits}, :class => "btn btn-danger"
+  %td= button_to 'See_balance',{action: :see_balance},:class => "btn btn-danger"
