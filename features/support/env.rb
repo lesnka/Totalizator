@@ -3,8 +3,29 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file 
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
-
+require 'rbconfig'
 require 'cucumber/rails'
+require 'cucumber/formatter/unicode' 
+require 'capybara' 
+require 'capybara/dsl' 
+require 'capybara/session' 
+require 'selenium-webdriver' 
+require 'capybara/cucumber' 
+
+Capybara.ignore_hidden_elements = true 
+Capybara.default_wait_time = 15 
+Capybara.app_host = "http://localhost:3000/" 
+
+Capybara.register_driver :selenium do |app| 
+    profile = Selenium::WebDriver::Firefox::Profile.new # только если мы хотим создать ноый профиль для FF. 
+    Selenium::WebDriver::Firefox.path = File.expand_path('~/path/to/firefox') # можем не указывать, тогда будет вызван FF по умолчанию. 
+    Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile) 
+end
+
+# регистрация драйвера для тестирования без участия web-браузера
+Capybara.register_driver :mechanize do |app| 
+    Capybara::Mechanize::Driver.new(app) 
+end
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd

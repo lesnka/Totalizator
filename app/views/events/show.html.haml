@@ -5,8 +5,8 @@
     %td= @event.status
     %td= @event.minbits
     - if can? :manage, Bit
-      = link_to 'Edit', edit_event_path(@event)
-      |
+      = button_to 'Edit', edit_event_path(@event)
+      
     = link_to 'Back', events_path
 
   

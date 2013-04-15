@@ -1,0 +1,19 @@
+username: <%= ENV['JENKINS_USERNAME'] %>
+    password: <%= ENV['JENKINS_PASSWORD'] %>
+    host:     <%= ENV['JENKINS_HOST']     %>
+    port:     80                                       #optional, default is 8080
+    jobs:
+      -
+        name:         'Job 1'    #compulsory
+        scm_provider: 'git'      #compulsory
+        scm_url:      'git://github.com/lesnka/Totalizator.git'  #compulsory
+        scm_branch:   'master'   #optional, default is 'master' if scm is git
+        shell_script: 'relative/path/to/build/script'  #optional, details below
+        keep_dependencies:                    false    #optional, default is 'false'
+        block_build_when_downstream_building: false    #optional, default is 'false'
+        block_build_when_upstream_building:   false    #optional, default is 'false'
+        concurrent_build:                     false    #optional, default is 'false'
+        child_projects:                       ~        #optional, default is 'null'
+        child_threshold:                      failure  #optional, value is 'success', 'failure', or 'unstable'
+                                                       # default is 'failure'
+      -

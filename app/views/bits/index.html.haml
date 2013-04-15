@@ -24,5 +24,5 @@
     %td{:colspan => "2"} Total
     %td.total_cell= number_to_currency(@user.sum_pay)
   
-  %td= button_to 'Pay bits', {action: :pay_bits}, :class => "btn btn-danger"
-  %td= button_to 'See_balance',{action: :see_balance},:class => "btn btn-danger"
+  %td= button_to 'Pay bits', {action: :pay_bits}, :class => "btn btn-danger", id: "pay_bits"
+  %td= button_to 'See_balance',{action: :see_balance},:class => "btn btn-danger", id: "See_balance"
