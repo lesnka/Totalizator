@@ -1,4 +1,4 @@
-Feature: Manage User
+ Feature: Manage User
   In to make a account
   As an user
   I want to create and manage articles
@@ -49,54 +49,54 @@ Scenario: Admin create events
   And I should see "Back"
 
 
-Scenario: User make bit
-  Given I sign_in
-  And I go Stawki
-  And a bits with title "Bit#1" and status "suspense" and minbits "200"
-  When I press "Make bit 0"
-  Then I should see "Bit was successfully created."  
+# Scenario: User make bit
+#   Given I sign_in
+#   And I go Stawki
+#   And a bits with title "Bit#1" and status "suspense" and minbits "200"
+#   When I press "Make bit 0"
+#   Then I should see "Bit was successfully created."  
 
-Scenario: User pay bit
-  Given I sign_in
-  And I go Stawki  
-  And a bits with title "Bit#1" and status "suspense" and minbits "200"
-  And a bits with title "Bit#2" and status "suspense" and minbits "150"
-  And I press "Make bit 0"
-  And I go YourBits 
-  When I press "Pay pay_this_bit"
-  Then I should see "Bit are made. Your balance is"
+# Scenario: User pay bit
+#   Given I sign_in
+#   And I go Stawki  
+#   And a bits with title "Bit#1" and status "suspense" and minbits "200"
+#   And a bits with title "Bit#2" and status "suspense" and minbits "150"
+#   And I press "Make bit 0"
+#   And I go YourBits 
+#   When I press "Pay pay_this_bit"
+#   Then I should see "Bit are made. Your balance is"
   
-Scenario: User pay bits
-  Given I sign_in
-  And I go Stawki  
-  And a bits with title "Bit#1" and status "suspense" and minbits "200"
-  And a bits with title "Bit#2" and status "suspense" and minbits "150"
-  And I press "Make bit 0"
-  And I go YourBits 
-  When I press "Pay bits"
-  Then I should see "Bits are made. Your balance is"
+# Scenario: User pay bits
+#   Given I sign_in
+#   And I go Stawki  
+#   And a bits with title "Bit#1" and status "suspense" and minbits "200"
+#   And a bits with title "Bit#2" and status "suspense" and minbits "150"
+#   And I press "Make bit 0"
+#   And I go YourBits 
+#   When I press "Pay bits"
+#   Then I should see "Bits are made. Your balance is"
 
-Scenario: User see balance with create wallet
-  Given I sign_in
-  And I go Stawki  
-  And a bits with title "Bit#1" and status "suspense" and minbits "200"
-  And a bits with title "Bit#2" and status "suspense" and minbits "150"
-  And I press "Make bit 0"
-  And I go YourBits 
-  When I press "See_balance"
-  Then I should see "Your balance"
-  And I should see "Your wallet is create Your balance 10000.0"
+# Scenario: User see balance with create wallet
+#   Given I sign_in
+#   And I go Stawki  
+#   And a bits with title "Bit#1" and status "suspense" and minbits "200"
+#   And a bits with title "Bit#2" and status "suspense" and minbits "150"
+#   And I press "Make bit 0"
+#   And I go YourBits 
+#   When I press "See_balance"
+#   Then I should see "Your balance"
+#   And I should see "Your wallet is create Your balance 10000.0"
 
-Scenario: User see balance with wallet
-  Given I sign_in
-  And I go Stawki  
-  And a bits with title "Bit#1" and status "suspense" and minbits "200"
-  And a bits with title "Bit#2" and status "suspense" and minbits "150"
-  And I press "Make bit 0"
-  And I go YourBits 
-  And I press "Pay bits"
-  And I press "See_balance"
-  Then I should see "Your balance"
-  And I should see "redirect to your balance:"
+# Scenario: User see balance with wallet
+#   Given I sign_in
+#   And I go Stawki  
+#   And a bits with title "Bit#1" and status "suspense" and minbits "200"
+#   And a bits with title "Bit#2" and status "suspense" and minbits "150"
+#   And I press "Make bit 0"
+#   And I go YourBits 
+#   And I press "Pay bits"
+#   And I press "See_balance"
+#   Then I should see "Your balance"
+#   And I should see "redirect to your balance:"
 
 

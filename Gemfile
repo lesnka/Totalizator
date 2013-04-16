@@ -24,11 +24,13 @@ gem "twitter-bootstrap-rails"
 gem 'anjlab-bootstrap-rails', '>= 2.3', :require => 'bootstrap-rails'
 group :development, :test do
  gem 'rspec-rails'
- gem "cucumber-rails", "~> 1.1.0"
-end
 
+end
+ gem "cucumber-rails", "~> 1.1.0"
 group :test do
+
  gem 'capybara'
+ gem 'spork'
  gem 'selenium-webdriver'
  gem 'database_cleaner'
  gem 'factory_girl_rails'
