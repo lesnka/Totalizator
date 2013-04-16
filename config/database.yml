@@ -2,7 +2,7 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: test
+  database: totalizator_development
   username: root
   password: 
   host: 127.0.0.1
@@ -11,7 +11,7 @@ development:
 test: &test
   adapter: mysql2
   encoding: utf8
-  database: test
+  database: totalizator_test
   username: root
   password: 
   host: 127.0.0.1
@@ -20,7 +20,7 @@ test: &test
 production:
   adapter: mysql2
   encoding: utf8
-  database: test
+  database: totalizator_development
   username: root
   password: 
   host: 127.0.0.1

@@ -26,9 +26,9 @@ group :development, :test do
  gem 'rspec-rails'
 
 end
- gem "cucumber-rails", "~> 1.1.0"
+ 
 group :test do
-
+ gem "cucumber-rails", "~> 1.1.0"
  gem 'capybara'
  gem 'spork'
  gem 'selenium-webdriver'
